@@ -1,0 +1,159 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(45, 34, 25, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-earth-50);
+  border-radius: 12px;
+  padding: var(--spacing-xl);
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  z-index: 1001;
+  box-shadow: 0 20px 60px rgba(45, 34, 25, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-earth-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all var(--transition-base);
+}
+
+.closeButton:hover {
+  background-color: var(--color-earth-200);
+  color: var(--color-earth-900);
+}
+
+.modalTitle {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  color: var(--color-earth-900);
+  margin-bottom: var(--spacing-sm);
+}
+
+.modalSubtitle {
+  font-size: 1rem;
+  color: var(--color-earth-600);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-earth-800);
+}
+
+.input,
+.textarea {
+  padding: 0.875rem;
+  border: 1px solid var(--color-earth-300);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-earth-900);
+  background-color: var(--color-earth-50);
+  transition: all var(--transition-base);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-terracotta);
+  box-shadow: 0 0 0 3px rgba(201, 125, 96, 0.1);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submitButton {
+  padding: 1rem 2rem;
+  background-color: var(--color-earth-800);
+  color: var(--color-earth-50);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all var(--transition-base);
+  margin-top: var(--spacing-sm);
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: var(--color-earth-900);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 34, 25, 0.2);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  padding: var(--spacing-sm);
+  background-color: var(--color-sage);
+  color: var(--color-earth-50);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.errorMessage {
+  padding: var(--spacing-sm);
+  background-color: var(--color-terracotta);
+  color: var(--color-earth-50);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: var(--spacing-md);
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modalTitle {
+    font-size: 1.5rem;
+  }
+}
+
