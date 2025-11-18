@@ -2,6 +2,9 @@
 
 A modern, animated portfolio website built with Next.js, React, and Framer Motion featuring an earthy neutral color scheme.
 
+🔗 **Live Site**: [View Portfolio](https://mr-hassan-javaid.github.io/Hassan-Portfolio)  
+📦 **Repository**: [GitHub](https://github.com/Mr-Hassan-Javaid/Hassan-Portfolio)
+
 ## Features
 
 - **Hero Section** - Animated introduction with call-to-action
@@ -76,4 +79,37 @@ The email form currently uses a mock submission. To integrate with a real email 
 npm run build
 npm start
 ```
+
+## Deployment
+
+### Deploy to Vercel (Recommended)
+
+The easiest way to deploy this Next.js portfolio is using [Vercel](https://vercel.com):
+
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com/new)
+3. Vercel will automatically detect Next.js and configure the build settings
+4. Your site will be live in minutes!
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Mr-Hassan-Javaid/Hassan-Portfolio)
+
+### Deploy to GitHub Pages
+
+To deploy to GitHub Pages, you'll need to configure Next.js for static export:
+
+1. Update `next.config.js` to enable static export
+2. Update the build script in `package.json`
+3. Push to your repository
+4. Enable GitHub Pages in repository settings
+
+### Deploy to Netlify
+
+1. Push your code to GitHub
+2. Import your repository on [Netlify](https://www.netlify.com)
+3. Build command: `npm run build`
+4. Publish directory: `.next`
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 
