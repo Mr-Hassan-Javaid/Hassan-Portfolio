@@ -6,7 +6,7 @@ import styles from './ProofSection.module.css'
 
 const caseStudies = [
   {
-    title: 'Taming Enterprise Chaos',
+    title: 'Measurable UX Impact Through Design Systems',
     challenge:
       'A legacy platform was causing a 40% user inefficiency rate due to a convoluted and outdated interface.',
     transformation:
@@ -15,7 +15,7 @@ const caseStudies = [
       'A 40% measured improvement in user efficiency and a 25% reduction in user-reported support tickets within the first quarter.',
   },
   {
-    title: 'From Data Overload to Instant Insight',
+    title: 'Redesigning Fintech Reporting for 50% Higher Engagement',
     challenge:
       'A fintech startup had powerful, complex financial data but no clear way for non-expert users to understand or act on it.',
     transformation:
@@ -38,7 +38,7 @@ export default function ProofSection() {
           transition={{ duration: 0.6 }}
           className={styles.heading}
         >
-          The Proof
+          Case Studies
         </motion.h2>
 
         <div className={styles.layout}>
