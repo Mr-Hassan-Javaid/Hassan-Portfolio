@@ -8,23 +8,28 @@ import ProofSection from '@/components/ProofSection'
 import CapabilitiesSection from '@/components/CapabilitiesSection'
 import CTASection from '@/components/CTASection'
 import EmailModal from '@/components/EmailModal'
+import GlitchIntro from '@/components/GlitchIntro'
 
 export default function Home() {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
+  const [showIntro, setShowIntro] = useState(true)
 
   return (
-    <main>
-      <Hero />
-      <ThinkingSection />
-      <ProcessSection />
-      <ProofSection />
-      <CapabilitiesSection />
-      <CTASection onOpenModal={() => setIsEmailModalOpen(true)} />
-      <EmailModal 
-        isOpen={isEmailModalOpen} 
-        onClose={() => setIsEmailModalOpen(false)} 
-      />
-    </main>
+    <>
+      {showIntro && <GlitchIntro onComplete={() => setShowIntro(false)} />}
+      <main>
+        <Hero />
+        <ThinkingSection />
+        <ProcessSection />
+        <ProofSection />
+        <CapabilitiesSection />
+        <CTASection onOpenModal={() => setIsEmailModalOpen(true)} />
+        <EmailModal
+          isOpen={isEmailModalOpen}
+          onClose={() => setIsEmailModalOpen(false)}
+        />
+      </main>
+    </>
   )
 }
 
