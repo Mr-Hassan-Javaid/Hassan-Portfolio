@@ -1,8 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './ProofSection.module.css'
 
 const caseStudies = [
@@ -23,6 +23,21 @@ const caseStudies = [
 export default function ProofSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const stepRef1 = useRef<HTMLDivElement | null>(null)
+  const stepRef2 = useRef<HTMLDivElement | null>(null)
+
+  const inViewStep1 = useInView(stepRef1, { margin: '-45% 0px -55% 0px' })
+  const inViewStep2 = useInView(stepRef2, { margin: '-45% 0px -55% 0px' })
+
+  const [activeCaseIndex, setActiveCaseIndex] = useState(0)
+
+  useEffect(() => {
+    if (inViewStep2) {
+      setActiveCaseIndex(1)
+    } else if (inViewStep1) {
+      setActiveCaseIndex(0)
+    }
+  }, [inViewStep1, inViewStep2])
 
   return (
     <section ref={ref} className={styles.section}>
@@ -35,47 +50,64 @@ export default function ProofSection() {
         >
           The Proof
         </motion.h2>
-        
-        <div className={styles.caseStudies}>
-          {caseStudies.map((study, index) => (
-            <motion.div
-              key={study.title}
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.3,
-                ease: 'easeOut',
-                type: 'spring',
-                stiffness: 100
-              }}
-              className={styles.caseStudy}
-              whileHover={{
-                scale: 1.02,
-                boxShadow: '0 20px 40px rgba(45, 34, 25, 0.1)',
-                transition: { duration: 0.3 }
-              }}
-            >
-              <h3 className={styles.caseTitle}>{study.title}</h3>
-              
-              <div className={styles.caseContent}>
-                <div className={styles.caseBlock}>
-                  <h4 className={styles.caseLabel}>The Challenge</h4>
-                  <p className={styles.caseText}>{study.challenge}</p>
+
+        <div className={styles.layout}>
+          <div className={styles.stickyCard}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={caseStudies[activeCaseIndex].title}
+                className={styles.caseStudy}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -40, scale: 0.97 }}
+                transition={{
+                  duration: 0.7,
+                  ease: 'easeOut',
+                  type: 'spring',
+                  stiffness: 90,
+                }}
+                whileHover={{
+                  scale: 1.02,
+                  rotateX: 1.5,
+                  rotateY: -1.5,
+                  boxShadow: '0 24px 60px rgba(45, 34, 25, 0.25)',
+                  transition: { duration: 0.35 },
+                }}
+              >
+                <h3 className={styles.caseTitle}>
+                  {caseStudies[activeCaseIndex].title}
+                </h3>
+
+                <div className={styles.caseContent}>
+                  <div className={styles.caseBlock}>
+                    <h4 className={styles.caseLabel}>The Challenge</h4>
+                    <p className={styles.caseText}>
+                      {caseStudies[activeCaseIndex].challenge}
+                    </p>
+                  </div>
+
+                  <div className={styles.caseBlock}>
+                    <h4 className={styles.caseLabel}>The Transformation</h4>
+                    <p className={styles.caseText}>
+                      {caseStudies[activeCaseIndex].transformation}
+                    </p>
+                  </div>
+
+                  <div className={styles.caseBlock}>
+                    <h4 className={styles.caseLabel}>The Outcome</h4>
+                    <p className={styles.caseText}>
+                      {caseStudies[activeCaseIndex].outcome}
+                    </p>
+                  </div>
                 </div>
-                
-                <div className={styles.caseBlock}>
-                  <h4 className={styles.caseLabel}>The Transformation</h4>
-                  <p className={styles.caseText}>{study.transformation}</p>
-                </div>
-                
-                <div className={styles.caseBlock}>
-                  <h4 className={styles.caseLabel}>The Outcome</h4>
-                  <p className={styles.caseText}>{study.outcome}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className={styles.steps}>
+            <div ref={stepRef1} className={styles.step} />
+            <div ref={stepRef2} className={styles.step} />
+          </div>
         </div>
       </div>
     </section>

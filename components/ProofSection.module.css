@@ -18,24 +18,32 @@
   letter-spacing: -0.01em;
 }
 
-.caseStudies {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
+.layout {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: var(--spacing-xl);
+}
+
+.stickyCard {
+  position: sticky;
+  top: 18vh;
 }
 
 .caseStudy {
-  background-color: var(--color-earth-100);
+  background: radial-gradient(circle at top left, #f3ebe3 0, #e7ddd3 45%, #d8cec3 100%);
   padding: var(--spacing-xl);
   border-radius: 12px;
-  border: 1px solid var(--color-earth-200);
+  border: 1px solid rgba(102, 80, 60, 0.25);
   transition: all var(--transition-base);
+  box-shadow: 0 16px 40px rgba(45, 34, 25, 0.16);
+  transform-origin: center;
 }
 
 .caseStudy:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(45, 34, 25, 0.12);
-  border-color: var(--color-earth-300);
+  box-shadow: 0 22px 64px rgba(45, 34, 25, 0.26);
+  border-color: rgba(102, 80, 60, 0.5);
 }
 
 .caseTitle {
@@ -75,6 +83,15 @@
   color: var(--color-earth-700);
 }
 
+.steps {
+  position: relative;
+  margin-top: var(--spacing-2xl);
+}
+
+.step {
+  height: 85vh;
+}
+
 @media (max-width: 768px) {
   .caseStudy {
     padding: var(--spacing-md);
@@ -86,6 +103,14 @@
   
   .caseBlock {
     padding: var(--spacing-sm);
+  }
+
+  .stickyCard {
+    top: 12vh;
+  }
+
+  .step {
+    height: 75vh;
   }
 }
 

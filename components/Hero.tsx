@@ -1,11 +1,66 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const fullTagline =
+    'I transform complex challenges into clear, intelligent, and impactful digital experiences'
+  const [displayedText, setDisplayedText] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+
+    const interval = setInterval(() => {
+      if (cancelled) return
+
+      setDisplayedText(prev => {
+        if (prev.length >= fullTagline.length) {
+          clearInterval(interval)
+          return prev
+        }
+        return prev + fullTagline[prev.length]
+      })
+    }, 30)
+
+    return () => {
+      cancelled = true
+      clearInterval(interval)
+    }
+  }, [fullTagline])
+
   return (
     <section className={styles.hero}>
+      <div className={styles.networkBackground} aria-hidden="true">
+        <svg
+          className={styles.networkSvg}
+          viewBox="0 0 800 400"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <g className={styles.networkLines}>
+            <line x1="80" y1="60" x2="260" y2="120" />
+            <line x1="260" y1="120" x2="420" y2="80" />
+            <line x1="420" y1="80" x2="620" y2="140" />
+            <line x1="180" y1="220" x2="340" y2="170" />
+            <line x1="340" y1="170" x2="520" y2="230" />
+            <line x1="120" y1="320" x2="280" y2="260" />
+            <line x1="280" y1="260" x2="480" y2="300" />
+          </g>
+          <g className={styles.networkDots}>
+            <circle cx="80" cy="60" r="3" />
+            <circle cx="260" cy="120" r="3" />
+            <circle cx="420" cy="80" r="3" />
+            <circle cx="620" cy="140" r="3" />
+            <circle cx="180" cy="220" r="3" />
+            <circle cx="340" cy="170" r="3" />
+            <circle cx="520" cy="230" r="3" />
+            <circle cx="120" cy="320" r="3" />
+            <circle cx="280" cy="260" r="3" />
+            <circle cx="480" cy="300" r="3" />
+          </g>
+        </svg>
+      </div>
       <div className={styles.container}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +94,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className={styles.tagline}
           >
-            I transform complex challenges into clear, intelligent, and impactful digital experiences
+            <span>{displayedText}</span>
+            <span className={styles.caret}>|</span>
           </motion.p>
           
           <motion.a

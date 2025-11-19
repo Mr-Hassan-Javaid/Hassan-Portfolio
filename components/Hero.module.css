@@ -21,6 +21,58 @@
   pointer-events: none;
 }
 
+.networkBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+}
+
+.networkSvg {
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  animation: networkDrift 18s ease-in-out infinite alternate;
+}
+
+.networkLines {
+  stroke: rgba(15, 23, 42, 0.32);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 10;
+  animation: networkPulse 6s ease-in-out infinite alternate;
+}
+
+.networkDots {
+  fill: rgba(15, 23, 42, 0.85);
+  filter: drop-shadow(0 0 8px rgba(15, 23, 42, 0.5));
+}
+
+@keyframes networkDrift {
+  0% {
+    transform: translate3d(-2%, -2%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(1%, 1%, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(3%, 3%, 0) scale(1.05);
+  }
+}
+
+@keyframes networkPulse {
+  0% {
+    stroke-opacity: 0.2;
+  }
+  50% {
+    stroke-opacity: 0.55;
+  }
+  100% {
+    stroke-opacity: 0.3;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -58,6 +110,25 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.caret {
+  display: inline-block;
+  margin-left: 0.2rem;
+  width: 0.7ch;
+  color: var(--color-earth-800);
+  animation: caretBlink 1s steps(2, start) infinite;
+}
+
+@keyframes caretBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .ctaButton {
