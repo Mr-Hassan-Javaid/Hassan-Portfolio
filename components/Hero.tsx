@@ -4,12 +4,18 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
 
-export default function Hero() {
+interface HeroProps {
+  introComplete?: boolean
+}
+
+export default function Hero({ introComplete = true }: HeroProps) {
   const fullTagline =
     'I transform complex challenges into clear, intelligent, and impactful digital experiences'
   const [displayedText, setDisplayedText] = useState('')
 
   useEffect(() => {
+    if (!introComplete) return
+
     let cancelled = false
     let interval: ReturnType<typeof setInterval> | null = null
 
@@ -42,7 +48,7 @@ export default function Hero() {
       }
       clearTimeout(delayTimeout)
     }
-  }, [fullTagline])
+  }, [fullTagline, introComplete])
 
   return (
     <section className={styles.hero}>

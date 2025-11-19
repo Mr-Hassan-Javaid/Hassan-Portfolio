@@ -13,12 +13,18 @@ import GlitchIntro from '@/components/GlitchIntro'
 export default function Home() {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
   const [showIntro, setShowIntro] = useState(true)
+  const [introComplete, setIntroComplete] = useState(false)
+
+  const handleIntroComplete = () => {
+    setShowIntro(false)
+    setIntroComplete(true)
+  }
 
   return (
     <>
-      {showIntro && <GlitchIntro onComplete={() => setShowIntro(false)} />}
+      {showIntro && <GlitchIntro onComplete={handleIntroComplete} />}
       <main>
-        <Hero />
+        <Hero introComplete={introComplete} />
         <ThinkingSection />
         <ProcessSection />
         <ProofSection />
