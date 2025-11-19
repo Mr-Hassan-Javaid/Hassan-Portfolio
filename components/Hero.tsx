@@ -51,7 +51,7 @@ export default function Hero({ introComplete = true }: HeroProps) {
   }, [fullTagline, introComplete])
 
   return (
-    <section className={styles.hero}>
+    <section id="hero" className={styles.hero}>
       <div className={styles.networkBackground} aria-hidden="true">
         <svg
           className={styles.networkSvg}

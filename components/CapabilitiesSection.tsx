@@ -41,6 +41,15 @@ export default function CapabilitiesSection() {
     sliderRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
   }
 
+  const scrollToHero = () => {
+    const heroElement = document.getElementById('hero')
+    if (heroElement) {
+      heroElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   useEffect(() => {
     const slider = sliderRef.current
     if (slider) {
@@ -98,6 +107,14 @@ export default function CapabilitiesSection() {
             ›
           </button>
         </motion.div>
+
+        <button
+          onClick={scrollToHero}
+          className={styles.backToHero}
+          aria-label="Back to hero section"
+        >
+          ↑
+        </button>
       </div>
     </section>
   )
