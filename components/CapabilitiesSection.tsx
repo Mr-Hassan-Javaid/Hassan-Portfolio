@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import styles from './CapabilitiesSection.module.css'
 
 const capabilities = [
@@ -16,7 +16,39 @@ const capabilities = [
 
 export default function CapabilitiesSection() {
   const ref = useRef(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  const checkScrollButtons = () => {
+    if (!sliderRef.current) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current
+    setCanScrollLeft(scrollLeft > 0)
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
+  }
+
+  const scrollLeft = () => {
+    if (!sliderRef.current) return
+    const cardWidth = 280 + 16 // card width + gap
+    sliderRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' })
+  }
+
+  const scrollRight = () => {
+    if (!sliderRef.current) return
+    const cardWidth = 280 + 16 // card width + gap
+    sliderRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    const slider = sliderRef.current
+    if (slider) {
+      slider.addEventListener('scroll', checkScrollButtons)
+      checkScrollButtons()
+      return () => slider.removeEventListener('scroll', checkScrollButtons)
+    }
+  }, [])
 
   return (
     <section ref={ref} className={styles.section}>
@@ -34,19 +66,37 @@ export default function CapabilitiesSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={styles.capabilitiesGrid}
+          className={styles.capabilitiesSlider}
         >
-          {capabilities.map((capability, index) => (
-            <motion.div
-              key={capability}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={styles.capability}
-            >
-              {capability}
-            </motion.div>
-          ))}
+          <button
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+            className={`${styles.navArrow} ${styles.navArrowLeft}`}
+            aria-label="Scroll left"
+          >
+            ‹
+          </button>
+          <div ref={sliderRef} className={styles.sliderContainer}>
+            {capabilities.map((capability, index) => (
+              <motion.div
+                key={capability}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={styles.capability}
+              >
+                {capability}
+              </motion.div>
+            ))}
+          </div>
+          <button
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+            className={`${styles.navArrow} ${styles.navArrowRight}`}
+            aria-label="Scroll right"
+          >
+            ›
+          </button>
         </motion.div>
       </div>
     </section>
