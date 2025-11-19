@@ -26,8 +26,9 @@ export default function ProofSection() {
   const stepRef1 = useRef<HTMLDivElement | null>(null)
   const stepRef2 = useRef<HTMLDivElement | null>(null)
 
-  const inViewStep1 = useInView(stepRef1, { margin: '-45% 0px -55% 0px' })
-  const inViewStep2 = useInView(stepRef2, { margin: '-45% 0px -55% 0px' })
+  // Center-triggered steps so each scroll \"screen\" selects a case tile
+  const inViewStep1 = useInView(stepRef1, { margin: '-50% 0px -50% 0px' })
+  const inViewStep2 = useInView(stepRef2, { margin: '-50% 0px -50% 0px' })
 
   const [activeCaseIndex, setActiveCaseIndex] = useState(0)
 
@@ -107,6 +108,7 @@ export default function ProofSection() {
           <div className={styles.steps}>
             <div ref={stepRef1} className={styles.step} />
             <div ref={stepRef2} className={styles.step} />
+            <div className={styles.stepSpacer} />
           </div>
         </div>
       </div>

@@ -89,7 +89,11 @@
 }
 
 .step {
-  height: 85vh;
+  height: 100vh;
+}
+
+.stepSpacer {
+  height: 100vh;
 }
 
 @media (max-width: 768px) {

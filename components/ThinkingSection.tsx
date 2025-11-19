@@ -12,9 +12,10 @@ export default function ThinkingSection() {
   const stepRef2 = useRef<HTMLDivElement | null>(null)
   const stepRef3 = useRef<HTMLDivElement | null>(null)
 
-  const inViewStep1 = useInView(stepRef1, { margin: '-40% 0px -60% 0px' })
-  const inViewStep2 = useInView(stepRef2, { margin: '-40% 0px -60% 0px' })
-  const inViewStep3 = useInView(stepRef3, { margin: '-40% 0px -60% 0px' })
+  // Center-based triggers so each \"screen\" of scroll clearly swaps the line
+  const inViewStep1 = useInView(stepRef1, { margin: '-50% 0px -50% 0px' })
+  const inViewStep2 = useInView(stepRef2, { margin: '-50% 0px -50% 0px' })
+  const inViewStep3 = useInView(stepRef3, { margin: '-50% 0px -50% 0px' })
 
   const [activeStage, setActiveStage] = useState(0)
 
