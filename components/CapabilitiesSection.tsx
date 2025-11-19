@@ -41,13 +41,8 @@ export default function CapabilitiesSection() {
     sliderRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' })
   }
 
-  const scrollToHero = () => {
-    const heroElement = document.getElementById('hero')
-    if (heroElement) {
-      heroElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   useEffect(() => {
@@ -109,9 +104,9 @@ export default function CapabilitiesSection() {
         </motion.div>
 
         <button
-          onClick={scrollToHero}
+          onClick={scrollToTop}
           className={styles.backToHero}
-          aria-label="Back to hero section"
+          aria-label="Back to top"
         >
           ↑
         </button>

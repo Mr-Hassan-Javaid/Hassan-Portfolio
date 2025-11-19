@@ -160,7 +160,7 @@
 }
 
 .backToHero {
-  position: absolute;
+  position: fixed;
   bottom: var(--spacing-xl);
   right: var(--spacing-xl);
   background: var(--color-earth-50);
