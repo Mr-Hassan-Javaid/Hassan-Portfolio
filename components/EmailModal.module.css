@@ -17,6 +17,7 @@
   background-color: var(--color-earth-50);
   border-radius: 12px;
   padding: var(--spacing-xl);
+  padding-bottom: calc(var(--spacing-xl) + var(--spacing-md));
   max-width: 600px;
   width: 90%;
   max-height: 85vh;
@@ -148,6 +149,7 @@
 @media (max-width: 768px) {
   .modal {
     padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + var(--spacing-sm));
     width: 95%;
     max-height: 90vh;
   }

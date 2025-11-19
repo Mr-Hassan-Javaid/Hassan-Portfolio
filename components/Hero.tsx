@@ -11,22 +11,36 @@ export default function Hero() {
 
   useEffect(() => {
     let cancelled = false
+    let interval: ReturnType<typeof setInterval> | null = null
 
-    const interval = setInterval(() => {
-      if (cancelled) return
+    const startTyping = () => {
+      interval = setInterval(() => {
+        if (cancelled) return
 
-      setDisplayedText(prev => {
-        if (prev.length >= fullTagline.length) {
-          clearInterval(interval)
-          return prev
-        }
-        return prev + fullTagline[prev.length]
-      })
-    }, 30)
+        setDisplayedText(prev => {
+          if (prev.length >= fullTagline.length) {
+            if (interval) {
+              clearInterval(interval)
+            }
+            return prev
+          }
+          return prev + fullTagline[prev.length]
+        })
+      }, 45)
+    }
+
+    const delayTimeout = setTimeout(() => {
+      if (!cancelled) {
+        startTyping()
+      }
+    }, 600)
 
     return () => {
       cancelled = true
-      clearInterval(interval)
+      if (interval) {
+        clearInterval(interval)
+      }
+      clearTimeout(delayTimeout)
     }
   }, [fullTagline])
 

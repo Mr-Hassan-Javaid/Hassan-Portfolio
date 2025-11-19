@@ -21,7 +21,7 @@ const caseStudies = [
     transformation:
       'Conducted user research to identify key decision-making moments, architected an interactive dashboard focused on clarity, and executed a solution that prioritized data visualization and instant comprehension.',
     outcome:
-      \"A 50% increase in user engagement with core reporting features and overwhelmingly positive feedback on the platform's newfound ease of use.\",
+      `A 50% increase in user engagement with core reporting features and overwhelmingly positive feedback on the platform's newfound ease of use.`,
   },
 ]
 
