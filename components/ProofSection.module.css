@@ -108,13 +108,15 @@
   .caseBlock {
     padding: var(--spacing-sm);
   }
+}
 
-  .stickyCard {
-    top: 12vh;
-  }
-
-  .step {
-    height: 75vh;
-  }
+.layout {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
 }
 

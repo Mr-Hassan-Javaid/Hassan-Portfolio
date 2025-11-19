@@ -39,16 +39,6 @@
   font-weight: 600;
   color: var(--color-earth-900);
 }
-
-.scrollSteps {
-  position: relative;
-  margin-top: var(--spacing-2xl);
-}
-
-.step {
-  height: 100vh;
-}
-
 @media (max-width: 768px) {
   .section {
     padding: var(--spacing-xl) 0;
