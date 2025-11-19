@@ -39,19 +39,43 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    // Simulate API call - replace with actual email service integration
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    
+    if (!accessKey) {
+      console.error('Web3Forms API key is not configured')
+      setSubmitStatus('error')
+      setIsSubmitting(false)
+      return
+    }
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      // Here you would typically send the email via an API endpoint
-      // Example: await fetch('/api/send-email', { method: 'POST', body: JSON.stringify(formData) })
-      
-      setSubmitStatus('success')
-      setTimeout(() => {
-        setFormData({ name: '', email: '', message: '' })
-        setSubmitStatus('idle')
-        onClose()
-      }, 2000)
+      const formDataToSend = new FormData()
+      formDataToSend.append('access_key', accessKey)
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('message', formData.message)
+      formDataToSend.append('subject', 'New Contact Form Submission - Portfolio')
+      formDataToSend.append('from_name', formData.name)
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitStatus('success')
+        setTimeout(() => {
+          setFormData({ name: '', email: '', message: '' })
+          setSubmitStatus('idle')
+          onClose()
+        }, 2000)
+      } else {
+        setSubmitStatus('error')
+      }
     } catch (error) {
+      console.error('Error submitting form:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
