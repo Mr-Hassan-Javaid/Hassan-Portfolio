@@ -239,9 +239,9 @@
   }
 
   .stepNumber {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
   }
 
   .stepTitle {
