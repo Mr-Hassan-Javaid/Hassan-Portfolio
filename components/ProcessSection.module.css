@@ -208,7 +208,8 @@
   }
 
   .heading {
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+    line-height: 1.2;
   }
 
   .stepperRail {
@@ -227,6 +228,8 @@
     padding: 0 var(--spacing-md);
     scrollbar-width: none;
     -ms-overflow-style: none;
+    justify-content: space-around;
+    min-height: 60px;
   }
 
   .progressLine::-webkit-scrollbar {
@@ -235,18 +238,21 @@
 
   .stepNode {
     flex-shrink: 0;
-    min-width: 70px;
+    min-width: 85px;
+    padding: var(--spacing-xs) 0;
   }
 
   .stepNumber {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     font-size: 0.875rem;
+    margin-bottom: var(--spacing-xs);
   }
 
   .stepTitle {
     font-size: 0.75rem;
-    max-width: 70px;
+    max-width: 85px;
+    line-height: 1.2;
   }
 
   .detailPanel {
