@@ -1,6 +1,73 @@
 .section {
   padding: var(--spacing-2xl) 0;
-  background-color: var(--color-earth-50);
+  background: linear-gradient(135deg, var(--color-earth-50) 0%, var(--color-earth-100) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(201, 125, 96, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(135, 169, 107, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(15, 23, 42, 0.01) 2px,
+      rgba(15, 23, 42, 0.01) 3px
+    );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.thinkingAccents {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.thinkingAccents::before,
+.thinkingAccents::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 125, 96, 0.1) 0%, transparent 70%);
+}
+
+.thinkingAccents::before {
+  width: 120px;
+  height: 120px;
+  top: 20%;
+  left: 15%;
+}
+
+.thinkingAccents::after {
+  width: 80px;
+  height: 80px;
+  bottom: 25%;
+  right: 20%;
 }
 
 .container {

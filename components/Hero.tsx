@@ -59,6 +59,7 @@ export default function Hero({ introComplete = true }: HeroProps) {
           preserveAspectRatio="xMidYMid slice"
         >
           <g className={styles.networkLines}>
+            {/* Primary connections */}
             <line x1="80" y1="60" x2="260" y2="120" />
             <line x1="260" y1="120" x2="420" y2="80" />
             <line x1="420" y1="80" x2="620" y2="140" />
@@ -66,18 +67,36 @@ export default function Hero({ introComplete = true }: HeroProps) {
             <line x1="340" y1="170" x2="520" y2="230" />
             <line x1="120" y1="320" x2="280" y2="260" />
             <line x1="280" y1="260" x2="480" y2="300" />
+            {/* Additional connections for density */}
+            <line x1="80" y1="60" x2="180" y2="220" />
+            <line x1="260" y1="120" x2="340" y2="170" />
+            <line x1="420" y1="80" x2="520" y2="230" />
+            <line x1="180" y1="220" x2="280" y2="260" />
+            <line x1="340" y1="170" x2="480" y2="300" />
+            <line x1="120" y1="320" x2="620" y2="140" />
+            <line x1="480" y1="300" x2="620" y2="140" />
+            {/* Secondary connections */}
+            <line x1="50" y1="150" x2="260" y2="120" />
+            <line x1="720" y1="200" x2="520" y2="230" />
+            <line x1="200" y1="350" x2="280" y2="260" />
           </g>
           <g className={styles.networkDots}>
+            {/* Hub nodes - larger with glow */}
+            <circle cx="260" cy="120" r="5" className={styles.hubDot} />
+            <circle cx="340" cy="170" r="5" className={styles.hubDot} />
+            <circle cx="280" cy="260" r="5" className={styles.hubDot} />
+            {/* Regular nodes */}
             <circle cx="80" cy="60" r="3" />
-            <circle cx="260" cy="120" r="3" />
             <circle cx="420" cy="80" r="3" />
             <circle cx="620" cy="140" r="3" />
             <circle cx="180" cy="220" r="3" />
-            <circle cx="340" cy="170" r="3" />
             <circle cx="520" cy="230" r="3" />
             <circle cx="120" cy="320" r="3" />
-            <circle cx="280" cy="260" r="3" />
             <circle cx="480" cy="300" r="3" />
+            {/* Additional nodes for density */}
+            <circle cx="50" cy="150" r="2.5" />
+            <circle cx="720" cy="200" r="2.5" />
+            <circle cx="200" cy="350" r="2.5" />
           </g>
         </svg>
       </div>

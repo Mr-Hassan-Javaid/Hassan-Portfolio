@@ -7,6 +7,7 @@ import styles from './ProofSection.module.css'
 const caseStudies = [
   {
     title: 'Measurable UX Impact Through Design Systems',
+    impact: '40% Efficiency Gain',
     challenge:
       'A legacy platform was causing a 40% user inefficiency rate due to a convoluted and outdated interface.',
     transformation:
@@ -15,7 +16,8 @@ const caseStudies = [
       'A 40% measured improvement in user efficiency and a 25% reduction in user-reported support tickets within the first quarter.',
   },
   {
-    title: 'Redesigning Fintech Reporting for 50% Higher Engagement',
+    title: 'Redesigning Fintech Reporting for Higher Engagement',
+    impact: '50% Engagement Increase',
     challenge:
       'A fintech startup had powerful, complex financial data but no clear way for non-expert users to understand or act on it.',
     transformation:
@@ -54,30 +56,47 @@ export default function ProofSection() {
                 delay: 0.1 * index,
               }}
               whileHover={{
-                scale: 1.02,
-                rotateX: 1.5,
-                rotateY: -1.5,
-                boxShadow: '0 24px 60px rgba(45, 34, 25, 0.25)',
-                transition: { duration: 0.35 },
+                scale: 1.01,
+                y: -4,
+                boxShadow: '0 20px 50px rgba(45, 34, 25, 0.2)',
+                transition: { duration: 0.4 },
               }}
             >
-              <h3 className={styles.caseTitle}>{caseStudy.title}</h3>
+              <div className={styles.caseHeader}>
+                <h3 className={styles.caseTitle}>{caseStudy.title}</h3>
+                <span className={styles.impactBadge}>{caseStudy.impact}</span>
+              </div>
 
               <div className={styles.caseContent}>
-                <div className={styles.caseBlock}>
+                <motion.div
+                  className={styles.caseBlock}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
                   <h4 className={styles.caseLabel}>The Challenge</h4>
                   <p className={styles.caseText}>{caseStudy.challenge}</p>
-                </div>
+                </motion.div>
 
-                <div className={styles.caseBlock}>
+                <motion.div
+                  className={styles.caseBlock}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   <h4 className={styles.caseLabel}>The Transformation</h4>
                   <p className={styles.caseText}>{caseStudy.transformation}</p>
-                </div>
+                </motion.div>
 
-                <div className={styles.caseBlock}>
+                <motion.div
+                  className={styles.caseBlock}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
                   <h4 className={styles.caseLabel}>The Outcome</h4>
                   <p className={styles.caseText}>{caseStudy.outcome}</p>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}

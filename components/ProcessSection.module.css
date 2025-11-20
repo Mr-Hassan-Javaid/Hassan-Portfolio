@@ -1,12 +1,29 @@
 .section {
   padding: var(--spacing-2xl) 0;
-  background: linear-gradient(180deg, var(--color-earth-50) 0%, var(--color-earth-100) 100%);
+  background: linear-gradient(135deg, var(--color-earth-50) 0%, var(--color-earth-100) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(201, 125, 96, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(135, 169, 107, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
 .heading {
@@ -14,83 +31,235 @@
   font-weight: 600;
   color: var(--color-earth-900);
   text-align: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
   letter-spacing: -0.01em;
 }
 
-.stepsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-xl);
-}
-
-.step {
-  background-color: var(--color-earth-50);
-  padding: var(--spacing-lg);
-  border-radius: 8px;
-  border: 1px solid var(--color-earth-200);
-  transition: all var(--transition-base);
+/* Stepper Rail */
+.stepperRail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2xl);
   position: relative;
-  overflow: hidden;
 }
 
-.step::before {
+.journeyLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-earth-600);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.progressLine {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin: 0 var(--spacing-lg);
+  min-width: 0; /* Allow flex shrinking */
+}
+
+.progressLine::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--color-terracotta) 0%, var(--color-ochre) 100%);
-  transform: scaleY(0);
-  transition: transform var(--transition-base);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(201, 125, 96, 0.3) 0%, rgba(135, 169, 107, 0.6) 100%);
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
-.step:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(45, 34, 25, 0.1);
-  border-color: var(--color-earth-300);
+/* Step Nodes */
+.stepNode {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  position: relative;
+  z-index: 2;
+  padding: var(--spacing-sm);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  min-width: 80px;
 }
 
-.step:hover::before {
-  transform: scaleY(1);
+.stepNode:focus {
+  outline: 2px solid var(--color-terracotta);
+  outline-offset: 2px;
 }
 
 .stepNumber {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--color-earth-300);
-  line-height: 1;
-  margin-bottom: var(--spacing-sm);
-  transition: color var(--transition-base);
-}
-
-.step:hover .stepNumber {
-  color: var(--color-terracotta);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  transition: all var(--transition-base);
+  border: 2px solid;
+  background: var(--color-earth-50);
+  color: var(--color-earth-600);
 }
 
 .stepTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-earth-900);
-  margin-bottom: var(--spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--color-earth-700);
+  transition: color var(--transition-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
 }
 
-.stepDescription {
-  font-size: 1rem;
-  line-height: 1.7;
+/* Step Node States */
+.stepNodeUpcoming .stepNumber {
+  background: var(--color-earth-50);
+  border-color: var(--color-earth-300);
+  color: var(--color-earth-500);
+}
+
+.stepNodeUpcoming .stepTitle {
+  color: var(--color-earth-500);
+}
+
+.stepNodeCompleted .stepNumber {
+  background: linear-gradient(135deg, var(--color-sage) 0%, rgba(135, 169, 107, 0.8) 100%);
+  border-color: var(--color-sage);
+  color: white;
+  box-shadow: 0 0 0 3px rgba(135, 169, 107, 0.3);
+}
+
+.stepNodeCompleted .stepTitle {
   color: var(--color-earth-700);
 }
 
+.stepNodeActive .stepNumber {
+  background: linear-gradient(135deg, var(--color-terracotta) 0%, rgba(201, 125, 96, 0.8) 100%);
+  border-color: var(--color-terracotta);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(201, 125, 96, 0.4);
+  transform: scale(1.1);
+}
+
+.stepNodeActive .stepTitle {
+  color: var(--color-terracotta);
+  font-weight: 600;
+}
+
+/* Detail Panel */
+.detailPanel {
+  background: linear-gradient(135deg, rgba(243, 235, 227, 0.8) 0%, rgba(230, 220, 210, 0.6) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 80, 60, 0.2);
+  border-radius: 16px;
+  padding: var(--spacing-2xl);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(45, 34, 25, 0.1);
+}
+
+.detailContent {
+  text-align: center;
+  max-width: 600px;
+}
+
+.stepCounter {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-earth-600);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detailTitle {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: var(--color-earth-900);
+  margin-bottom: var(--spacing-lg);
+  letter-spacing: -0.01em;
+}
+
+.detailDescription {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-earth-700);
+  margin: 0;
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .stepsGrid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+  .section {
+    padding: var(--spacing-xl) 0;
   }
-  
-  .step {
-    padding: var(--spacing-md);
+
+  .heading {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .stepperRail {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .journeyLabel {
+    font-size: 0.875rem;
+  }
+
+  .progressLine {
+    width: 100%;
+    margin: 0;
+    overflow-x: auto;
+    padding: 0 var(--spacing-md);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .progressLine::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stepNode {
+    flex-shrink: 0;
+    min-width: 70px;
+  }
+
+  .stepNumber {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .stepTitle {
+    font-size: 0.75rem;
+    max-width: 70px;
+  }
+
+  .detailPanel {
+    padding: var(--spacing-xl);
+    min-height: 250px;
+  }
+
+  .detailTitle {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+  }
+
+  .detailDescription {
+    font-size: 1rem;
   }
 }
 

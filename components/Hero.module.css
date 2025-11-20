@@ -15,9 +15,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
+  background:
     radial-gradient(circle at 20% 50%, rgba(201, 125, 96, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(135, 169, 107, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(135, 169, 107, 0.05) 0%, transparent 50%),
+    conic-gradient(from 45deg at 50% 50%, transparent 0deg, rgba(15, 23, 42, 0.02) 90deg, transparent 180deg, rgba(201, 125, 96, 0.02) 270deg, transparent 360deg);
   pointer-events: none;
 }
 
@@ -41,7 +42,7 @@
   stroke: rgba(15, 23, 42, 0.32);
   stroke-width: 1.2;
   stroke-dasharray: 4 10;
-  animation: networkPulse 6s ease-in-out infinite alternate;
+  animation: networkPulse 8s ease-in-out infinite alternate;
 }
 
 .networkDots {
@@ -49,27 +50,32 @@
   filter: drop-shadow(0 0 8px rgba(15, 23, 42, 0.5));
 }
 
+.hubDot {
+  fill: rgba(201, 125, 96, 0.9);
+  filter: drop-shadow(0 0 12px rgba(201, 125, 96, 0.4)) drop-shadow(0 0 24px rgba(201, 125, 96, 0.2));
+}
+
 @keyframes networkDrift {
   0% {
-    transform: translate3d(-2%, -2%, 0) scale(1.05);
+    transform: translate3d(-1%, -1%, 0) scale(1.02);
   }
   50% {
-    transform: translate3d(1%, 1%, 0) scale(1.02);
+    transform: translate3d(0.5%, 0.5%, 0) scale(1.01);
   }
   100% {
-    transform: translate3d(3%, 3%, 0) scale(1.05);
+    transform: translate3d(1.5%, 1.5%, 0) scale(1.02);
   }
 }
 
 @keyframes networkPulse {
   0% {
-    stroke-opacity: 0.2;
+    stroke-opacity: 0.25;
   }
   50% {
-    stroke-opacity: 0.55;
+    stroke-opacity: 0.45;
   }
   100% {
-    stroke-opacity: 0.3;
+    stroke-opacity: 0.35;
   }
 }
 

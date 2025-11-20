@@ -6,12 +6,12 @@ import { useRef, useState, useEffect } from 'react'
 import styles from './CapabilitiesSection.module.css'
 
 const capabilities = [
-  'Strategic Design',
-  'UI/UX & Design Systems',
-  'Interactive Prototyping',
-  'Front-End Development with AI',
-  'User Research',
-  'System Architecture',
+  { label: 'Strategic Design', category: 'Strategy' },
+  { label: 'UI/UX & Design Systems', category: 'Experience' },
+  { label: 'Interactive Prototyping', category: 'Experience' },
+  { label: 'Front-End Development with AI', category: 'Technical' },
+  { label: 'User Research', category: 'Strategy' },
+  { label: 'System Architecture', category: 'Technical' },
 ]
 
 export default function CapabilitiesSection() {
@@ -65,7 +65,16 @@ export default function CapabilitiesSection() {
         >
           An Ecosystem of Capabilities
         </motion.h2>
-        
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className={styles.description}
+        >
+          Where strategy, experience, and technical expertise converge to transform ideas into impactful solutions.
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -83,13 +92,16 @@ export default function CapabilitiesSection() {
           <div ref={sliderRef} className={styles.sliderContainer}>
             {capabilities.map((capability, index) => (
               <motion.div
-                key={capability}
+                key={capability.label}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={styles.capability}
               >
-                {capability}
+                <span className={styles.capabilityLabel}>{capability.label}</span>
+                <span className={`${styles.categoryPill} ${styles[`category${capability.category}`]}`}>
+                  {capability.category}
+                </span>
               </motion.div>
             ))}
           </div>

@@ -12,6 +12,7 @@ export default function ThinkingSection() {
 
   return (
     <section ref={ref} className={styles.section}>
+      <div className={styles.thinkingAccents} aria-hidden="true"></div>
       <div className={styles.container}>
         <div className={styles.layout}>
           <motion.div
