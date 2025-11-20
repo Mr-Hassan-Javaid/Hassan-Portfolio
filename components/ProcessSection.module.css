@@ -85,10 +85,10 @@
   gap: var(--spacing-xs);
   position: relative;
   z-index: 2;
-  padding: var(--spacing-sm);
-  border-radius: 50%;
+  padding: 0;
+  border-radius: 0;
   transition: all var(--transition-base);
-  min-width: 80px;
+  min-width: 72px;
 }
 
 .stepNode:focus {
@@ -97,13 +97,13 @@
 }
 
 .stepNumber {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: all var(--transition-base);
   border: 2px solid;
@@ -138,7 +138,7 @@
   background: linear-gradient(135deg, var(--color-sage) 0%, rgba(135, 169, 107, 0.8) 100%);
   border-color: var(--color-sage);
   color: white;
-  box-shadow: 0 0 0 3px rgba(135, 169, 107, 0.3);
+  box-shadow: 0 0 0 2px rgba(135, 169, 107, 0.3);
 }
 
 .stepNodeCompleted .stepTitle {
@@ -149,8 +149,8 @@
   background: linear-gradient(135deg, var(--color-terracotta) 0%, rgba(201, 125, 96, 0.8) 100%);
   border-color: var(--color-terracotta);
   color: white;
-  box-shadow: 0 0 0 4px rgba(201, 125, 96, 0.4);
-  transform: scale(1.1);
+  box-shadow: 0 0 0 3px rgba(201, 125, 96, 0.4);
+  transform: scale(1.05);
 }
 
 .stepNodeActive .stepTitle {
