@@ -31,7 +31,7 @@
   font-weight: 600;
   color: var(--color-earth-900);
   text-align: center;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
   letter-spacing: -0.01em;
 }
 
@@ -40,7 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
   position: relative;
 }
 
@@ -58,7 +58,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  margin: 0 var(--spacing-lg);
+  margin: 0 var(--spacing-md);
   min-width: 0; /* Allow flex shrinking */
 }
 
@@ -88,7 +88,7 @@
   padding: 0;
   border-radius: 0;
   transition: all var(--transition-base);
-  min-width: 72px;
+  min-width: 65px;
 }
 
 .stepNode:focus {
@@ -150,7 +150,7 @@
   border-color: var(--color-terracotta);
   color: white;
   box-shadow: 0 0 0 3px rgba(201, 125, 96, 0.4);
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .stepNodeActive .stepTitle {
@@ -205,16 +205,19 @@
 @media (max-width: 768px) {
   .section {
     padding: var(--spacing-xl) 0;
+    overflow: visible;
   }
 
   .heading {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-lg);
     line-height: 1.2;
   }
 
   .stepperRail {
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    overflow: visible;
   }
 
   .journeyLabel {
@@ -225,11 +228,13 @@
     width: 100%;
     margin: 0;
     overflow-x: auto;
-    padding: 0 var(--spacing-md);
+    overflow-y: visible;
+    padding: var(--spacing-sm) var(--spacing-md);
     scrollbar-width: none;
     -ms-overflow-style: none;
     justify-content: space-around;
-    min-height: 60px;
+    min-height: 80px;
+    align-items: center;
   }
 
   .progressLine::-webkit-scrollbar {
@@ -238,8 +243,9 @@
 
   .stepNode {
     flex-shrink: 0;
-    min-width: 85px;
-    padding: var(--spacing-xs) 0;
+    min-width: 90px;
+    padding: var(--spacing-sm) var(--spacing-xs);
+    margin: 0 var(--spacing-xs);
   }
 
   .stepNumber {
@@ -247,16 +253,17 @@
     height: 32px;
     font-size: 0.875rem;
     margin-bottom: var(--spacing-xs);
+    border-radius: 50%;
   }
 
   .stepTitle {
     font-size: 0.75rem;
-    max-width: 85px;
-    line-height: 1.2;
+    max-width: 90px;
+    line-height: 1.3;
   }
 
   .detailPanel {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-xl);
     min-height: 250px;
   }
 
