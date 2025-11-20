@@ -49,17 +49,22 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
     }
 
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('access_key', accessKey)
-      formDataToSend.append('name', formData.name)
-      formDataToSend.append('email', formData.email)
-      formDataToSend.append('message', formData.message)
-      formDataToSend.append('subject', 'New Contact Form Submission - Portfolio')
-      formDataToSend.append('from_name', formData.name)
+      const data = {
+        access_key: accessKey,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        subject: 'New Contact Form Submission - Portfolio',
+        from_name: formData.name
+      }
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formDataToSend
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
       })
 
       const result = await response.json()
@@ -72,6 +77,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
           onClose()
         }, 2000)
       } else {
+        console.error('Form submission failed:', result.message)
         setSubmitStatus('error')
       }
     } catch (error) {
