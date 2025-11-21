@@ -17,6 +17,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   useEffect(() => {
     if (isOpen) {
@@ -43,20 +44,25 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
     
     if (!accessKey) {
       console.error('Web3Forms API key is not configured')
+      setErrorMessage('API key is not configured. Please check your environment variables.')
       setSubmitStatus('error')
       setIsSubmitting(false)
       return
     }
 
     try {
+      // Add honeypot field (botcheck) to help reduce spam filter false positives
       const data = {
         access_key: accessKey,
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
         subject: 'New Contact Form Submission - Portfolio',
-        from_name: formData.name
+        from_name: formData.name.trim(),
+        botcheck: '', // Honeypot field - should always be empty for legitimate submissions
       }
+
+      console.log('Submitting form with data:', { ...data, access_key: '[REDACTED]' })
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -67,21 +73,37 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
         body: JSON.stringify(data)
       })
 
+      console.log('Web3Forms response status:', response.status, response.statusText)
+
       const result = await response.json()
+      console.log('Web3Forms full response:', JSON.stringify(result, null, 2))
 
       if (result.success) {
+        console.log('Form submission successful')
         setSubmitStatus('success')
+        setErrorMessage('')
         setTimeout(() => {
           setFormData({ name: '', email: '', message: '' })
           setSubmitStatus('idle')
           onClose()
         }, 2000)
       } else {
-        console.error('Form submission failed:', result.message)
+        const errorMsg = result.message || 'Unknown error occurred'
+        console.error('Form submission failed:', {
+          message: errorMsg,
+          fullResponse: result
+        })
+        setErrorMessage(errorMsg)
         setSubmitStatus('error')
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
+      const errorMsg = error instanceof Error ? error.message : 'Network error occurred'
+      console.error('Error submitting form:', {
+        error,
+        message: errorMsg,
+        stack: error instanceof Error ? error.stack : undefined
+      })
+      setErrorMessage(errorMsg)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -170,6 +192,15 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                 />
               </div>
               
+              {/* Honeypot field - hidden from users, helps prevent spam */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+              
               {submitStatus === 'success' && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -186,7 +217,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                   animate={{ opacity: 1, y: 0 }}
                   className={styles.errorMessage}
                 >
-                  Something went wrong. Please try again.
+                  {errorMessage || 'Something went wrong. Please try again.'}
                 </motion.div>
               )}
               
